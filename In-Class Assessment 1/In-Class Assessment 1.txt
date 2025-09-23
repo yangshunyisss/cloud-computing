@@ -1,0 +1,41 @@
+(a) Cloud Service Models
+1.Infrastructure as a Service (IaaS):
+	IaaS provides virtualized computing resources—such as servers, storage, and networking—over the internet. The provider manages the physical infrastructure, while developers and system administrators manage the operating system, applications, and middleware.
+	Example in software development: Using AWS EC2 or Google Compute Engine to spin up virtual machines for hosting build servers, running automated integration tests, or deploying custom environments needed for specific programming languages and frameworks.
+2.Platform as a Service (PaaS):
+	PaaS offers a managed environment where developers can build, test, and deploy applications without managing the underlying infrastructure. The platform handles runtime, middleware, scaling, and patching.
+	Example in software development: Using Heroku or AWS Elastic Beanstalk to deploy a web application. Developers push code, and the platform takes care of provisioning the runtime environment, load balancing, and scaling.
+3.Software as a Service (SaaS):
+	SaaS delivers ready-to-use applications over the internet. Users consume the software via web or API without worrying about maintenance, infrastructure, or platform configuration.
+	Example in software development: Using GitHub (for version control and collaboration), Jira (for project management), or Slack (for team communication) as part of the development workflow.
+
+
+(b) What is Docker?
+
+	Docker is a containerization platform that allows developers to package applications and their dependencies into lightweight, portable containers. Containers run consistently across different environments, solving the "works on my machine" problem.
+
+Scenario:
+	Imagine a microservices-based project where one service is built with Python, another with Node.js, and a third relies on PostgreSQL. Each service has its own dependencies and environment configurations. Without containers, developers may struggle to replicate the same setup across machines.
+
+How containerization helps:
+Consistency: Each service runs inside its own container with all dependencies included, ensuring it works the same locally, in CI/CD pipelines, and in production.
+Isolation: Dependencies of one service do not interfere with another.
+Portability: Containers can run on any system with Docker installed.
+Faster development & deployment: Developers can spin up containers quickly, test, and deploy using the same container image, reducing configuration errors.
+
+
+(c) Deploying n8n with Docker
+
+Command:
+docker run -d --name n8n -p 127.0.0.1:5678:5678 -v "E:\study1\cloud computing":/home/node/.n8n --restart unless-stopped n8nio/n8n:latest
+Explanation of the command:
+docker run → Create and start a new container.
+-d → Run in detached mode (in the background).
+--name n8n → Assigns the container a name (n8n) for easier reference.
+-p 127.0.0.1:5678:5678 → Maps port 5678 of the container to port 5678 on the local machine, bound to the loopback address (so it’s only accessible from the host).
+-v "E:\study1\cloud computing":/home/node/.n8n → Mounts the local folder E:\study1\cloud computing to the container’s /home/node/.n8n directory. This ensures that workflows and configuration are saved persistently on my computer.
+--restart unless-stopped → Ensures the container restarts automatically if Docker or the host machine restarts (unless stopped manually).
+n8nio/n8n:latest → Specifies the Docker image to use (official n8n image from Docker Hub).
+
+Then Open browser and visit:http://127.0.0.1:5678
+
